@@ -1,0 +1,7 @@
+These files are unused backups or duplicates and should be deleted to avoid confusion:
+- src/pages/Post.jsx.new
+- src/components/post-form/PostForm.jsx.bak
+- src/components/post-form/PostForm.jsx.new
+- temp-postform.jsx
+
+I recommend deleting them. If you want to keep a backup, move them outside the src/ directory or into a dedicated backup folder not included in your build process.
