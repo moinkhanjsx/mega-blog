@@ -2,13 +2,23 @@ import React, {useEffect, useState} from 'react'
 import appwriteService from "../appwrite/config";
 import { PostCard } from "../components";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../components/Logo";
 
 function Home() {
     const [posts, setPosts] = useState([])
     const userData = useSelector((state) => state.auth.userData);
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    
+    useEffect(() => {
+        // Restore scroll position if returning from a post
+        if (location.state && location.state.scrollPosition) {
+            setTimeout(() => {
+                window.scrollTo(0, location.state.scrollPosition);
+            }, 0);
+        }
+    }, [location]);
 
     useEffect(() => {
         appwriteService.getPosts().then((posts) => {
@@ -48,9 +58,9 @@ function Home() {
                 <h1 className="text-5xl font-extrabold text-center mt-2 mb-2 bg-gradient-to-r from-pink-500 via-indigo-500 to-purple-500 text-transparent bg-clip-text drop-shadow-lg animate-gradient-x">Latest Posts</h1>
                 <p className="text-xl text-gray-600">Discover the latest from our community</p>
             </div>
-            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
                 {posts.slice(0, 6).map((post) => (
-                    <div key={post.$id} className="animate-fade-in-up">
+                    <div key={post.$id} className="animate-fade-in-up flex items-stretch w-full">
                         <PostCard {...post} />
                     </div>
                 ))}

@@ -71,8 +71,38 @@ class AppwriteService {
         );
     }
 
-    getFilePreview(fileId) {
-        return this.bucket.getFilePreview(conf.appwriteBucketId, fileId).href;
+    getFilePreview(fileId, width = 800) {
+        try {
+            if (!fileId) {
+                console.warn("Missing file ID in getFilePreview");
+                return null;
+            }
+            
+            // Construct the URL directly with the Appwrite endpoint and project ID
+            const previewUrl = `${conf.appwriteUrl}/storage/buckets/${conf.appwriteBucketId}/files/${fileId}/preview?project=${conf.appwriteProjectId}&width=${width}`;
+            console.log("Generated image preview URL:", previewUrl);
+            return previewUrl;
+        } catch (error) {
+            console.error("Appwrite getFilePreview error:", error);
+            return null;
+        }
+    }
+    
+    getFileDownload(fileId) {
+        try {
+            if (!fileId) {
+                console.warn("Missing file ID in getFileDownload");
+                return null;
+            }
+            
+            // Construct the URL directly with the Appwrite endpoint and project ID
+            const downloadUrl = `${conf.appwriteUrl}/storage/buckets/${conf.appwriteBucketId}/files/${fileId}/download?project=${conf.appwriteProjectId}`;
+            console.log("Generated download URL:", downloadUrl);
+            return downloadUrl;
+        } catch (error) {
+            console.error("Appwrite getFileDownload error:", error);
+            return null;
+        }
     }
 }
 
