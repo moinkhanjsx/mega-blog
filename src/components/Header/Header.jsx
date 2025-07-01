@@ -7,22 +7,37 @@ import LogoutBtn from "./LogoutBtn";
 export default function Header() {
     const authStatus = useSelector((state) => state.auth.status);
     return (
-        <header className="sticky top-0 z-50 w-full py-4 px-6 flex items-center justify-between bg-gradient-to-r from-pink-500 via-indigo-500 to-purple-500 text-white shadow-xl">
-            <div className="flex items-center gap-4">
+        <header className="sticky top-0 z-50 w-full px-0 flex items-center justify-between bg-white/20 backdrop-blur-2xl border-b border-gray-200 shadow-2xl">
+            <div className="flex items-center gap-4 pl-6 py-2">
                 <Logo />
             </div>
-            <nav className="flex gap-6 text-lg font-semibold items-center">
-                <Link to="/" className="hover:text-pink-200 transition">Home</Link>
+            <nav className="flex gap-2 md:gap-4 lg:gap-6 text-base md:text-lg font-semibold items-center pr-4 md:pr-8">
+                <Link to="/" className="relative px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-200/60 hover:to-pink-200/60 text-gray-700 hover:text-indigo-700 transition font-bold group overflow-hidden">
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-indigo-400 via-pink-400 to-purple-400 blur-lg transition-all duration-300"></span>
+                    <span className="relative z-10">Home</span>
+                </Link>
                 {authStatus && (
                   <>
-                    <Link to="/add-post" className="hover:text-pink-200 transition">Add Post</Link>
-                    <Link to="/all-posts" className="hover:text-pink-200 transition">All Posts</Link>
+                    <Link to="/add-post" className="relative px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-200/60 hover:to-pink-200/60 text-gray-700 hover:text-indigo-700 transition font-bold group overflow-hidden">
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-indigo-400 via-pink-400 to-purple-400 blur-lg transition-all duration-300"></span>
+                      <span className="relative z-10">Add Post</span>
+                    </Link>
+                    <Link to="/all-posts" className="relative px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-200/60 hover:to-pink-200/60 text-gray-700 hover:text-indigo-700 transition font-bold group overflow-hidden">
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-indigo-400 via-pink-400 to-purple-400 blur-lg transition-all duration-300"></span>
+                      <span className="relative z-10">All Posts</span>
+                    </Link>
                   </>
                 )}
                 {!authStatus && (
                   <>
-                    <Link to="/login" className="hover:text-pink-200 transition">Login</Link>
-                    <Link to="/signup" className="hover:text-pink-200 transition">Signup</Link>
+                    <Link to="/login" className="relative px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-200/60 hover:to-pink-200/60 text-gray-700 hover:text-indigo-700 transition font-bold group overflow-hidden">
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-indigo-400 via-pink-400 to-purple-400 blur-lg transition-all duration-300"></span>
+                      <span className="relative z-10">Login</span>
+                    </Link>
+                    <Link to="/signup" className="relative px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-200/60 hover:to-pink-200/60 text-gray-700 hover:text-indigo-700 transition font-bold group overflow-hidden">
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-indigo-400 via-pink-400 to-purple-400 blur-lg transition-all duration-300"></span>
+                      <span className="relative z-10">Signup</span>
+                    </Link>
                   </>
                 )}
                 {authStatus && <LogoutBtn />}

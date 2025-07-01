@@ -228,76 +228,86 @@ export default function PostForm({ post }) {
     };
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="max-w-2xl mx-auto bg-white p-10 rounded-2xl shadow-2xl mt-12 space-y-10 border border-gray-100">
+        <form onSubmit={handleSubmit(submit)} className="max-w-2xl mx-auto bg-gradient-to-br from-indigo-50 via-pink-50 to-purple-50 p-10 rounded-3xl shadow-2xl mt-14 space-y-10 border border-gray-200 animate-fade-in">
             {/* fallback UI for debugging */}
             {!userData && <div className="text-red-600 font-semibold text-center">User not logged in or userData missing</div>}
             {error && (
-                <div className="bg-red-100 text-red-700 p-4 rounded-lg mb-6 text-center font-medium border border-red-200 animate-pulse">
+                <div className="bg-red-50 text-red-700 p-4 rounded-lg mb-6 text-center font-semibold border border-red-200 animate-pulse shadow">
                     <p>{error}</p>
                 </div>
             )}
             {successMessage && (
-                <div className="bg-green-100 text-green-700 p-4 rounded-lg mb-6 text-center font-medium border border-green-200 animate-pulse">
+                <div className="bg-green-50 text-green-700 p-4 rounded-lg mb-6 text-center font-semibold border border-green-200 animate-pulse shadow">
                     <p>{successMessage}</p>
                 </div>
             )}
-            <div className="space-y-6">
-                <h2 className="text-3xl font-extrabold text-center mb-8 bg-gradient-to-r from-pink-500 via-indigo-500 to-purple-500 text-transparent bg-clip-text drop-shadow-lg animate-gradient-x">{post ? 'Edit Post' : 'New Post'}</h2>
-                <Input
-                    label="Title :"
-                    placeholder="Enter a catchy title..."
-                    {...register("title", { required: true })}
-                />
-                {errors.title && (
-                  <p className="text-red-500 text-xs mt-1 ml-1">Title is required.</p>
-                )}
-                <RTE 
-                  label="Content :" 
-                  name="content" 
-                  control={control} 
-                  defaultValue={getValues("content")}
-                  rules={{
-                    required: "Content is required.",
-                    validate: value => (value && value.trim() !== '') || "Content is required."
-                  }}
-                />
-                {errors.content && (
-                  <p className="text-red-500 text-xs mt-1 ml-1">{errors.content.message}</p>
-                )}
+            <div className="space-y-8">
+                <h2 className="text-4xl font-black text-center mb-8 bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow animate-gradient-x tracking-tight">
+                    {post ? 'Edit Post' : 'Create New Post'}
+                </h2>
+                <div className="space-y-2">
+                    <Input
+                        label="Title :"
+                        placeholder="Enter a catchy title..."
+                        {...register("title", { required: true })}
+                    />
+                    {errors.title && (
+                      <p className="text-red-500 text-xs mt-1 ml-1">Title is required.</p>
+                    )}
+                </div>
+                <div className="space-y-2">
+                    <RTE 
+                      label="Content :" 
+                      name="content" 
+                      control={control} 
+                      defaultValue={getValues("content")}
+                      rules={{
+                        required: "Content is required.",
+                        validate: value => (value && value.trim() !== '') || "Content is required."
+                      }}
+                    />
+                    {errors.content && (
+                      <p className="text-red-500 text-xs mt-1 ml-1">{errors.content.message}</p>
+                    )}
+                </div>
             </div>
-            <div className="space-y-6">
-                <Input
-                    label="Featured Image :"
-                    type="file"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: !post })}
-                />
-                {errors.image && (
-                  <p className="text-red-500 text-xs mt-1 ml-1">Featured image is required.</p>
-                )}
-                {post && (
-                    <div className="flex justify-center mb-4">
-                        <img
-                            src={appwriteService.getFilePreview(post.featuredImage || post.featuredimage)}
-                            alt={post.title}
-                            className="rounded-xl shadow-lg w-56 h-36 object-cover border-2 border-indigo-200"
-                        />
-                    </div>
-                )}
-                <Select
-                    options={["active", "inactive"]}
-                    label="Status"
-                    {...register("status", { required: true })}
-                />
-                {errors.status && (
-                  <p className="text-red-500 text-xs mt-1 ml-1">Status is required.</p>
-                )}
+            <div className="space-y-8 border-t border-gray-100 pt-8">
+                <div className="space-y-2">
+                    <Input
+                        label="Featured Image :"
+                        type="file"
+                        accept="image/png, image/jpg, image/jpeg, image/gif"
+                        {...register("image", { required: !post })}
+                    />
+                    {errors.image && (
+                      <p className="text-red-500 text-xs mt-1 ml-1">Featured image is required.</p>
+                    )}
+                    {post && (
+                        <div className="flex justify-center mb-2">
+                            <img
+                                src={appwriteService.getFilePreview(post.featuredImage || post.featuredimage)}
+                                alt={post.title}
+                                className="rounded-xl shadow-lg w-56 h-36 object-cover border-2 border-indigo-200 bg-gray-50"
+                            />
+                        </div>
+                    )}
+                </div>
+                <div className="space-y-2">
+                    <Select
+                        options={["active", "inactive"]}
+                        label="Status"
+                        {...register("status", { required: true })}
+                    />
+                    {errors.status && (
+                      <p className="text-red-500 text-xs mt-1 ml-1">Status is required.</p>
+                    )}
+                </div>
                 <Button 
                     type="submit" 
                     disabled={loading}
-                    className="w-full py-3 text-lg rounded-xl bg-gradient-to-r from-pink-500 via-indigo-500 to-purple-500 text-white font-bold shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-4 animate-gradient-x"
+                    className="w-full py-3 text-lg rounded-xl bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 text-white font-bold shadow-xl hover:scale-[1.03] hover:shadow-2xl focus:ring-2 focus:ring-indigo-400 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-4 animate-gradient-x tracking-wide"
                 > 
-                    {loading ? "Processing..." : (post ? "Update" : "Submit")} 
+                    {loading ? "Processing..." : (post ? "Update Post" : "Publish Post")} 
                 </Button>
             </div>
         </form>
