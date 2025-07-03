@@ -43,7 +43,8 @@ export class AuthService {
 
     async createEmailPasswordSession(email, password) {
         try {
-            return await this.account.createEmailPasswordSession(email, password);
+            // In Appwrite v13, the method is createEmailSession
+            return await this.account.createEmailSession(email, password);
         } catch (error) {
             console.error("Login Error:", {
                 message: error.message,

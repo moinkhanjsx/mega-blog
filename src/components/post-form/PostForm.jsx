@@ -97,13 +97,9 @@ export default function PostForm({ post }) {
                         title: data.title,
                         content: data.content,
                         featuredimage: file ? file.$id : (post.featuredimage || post.featuredImage), 
-                        userid: userData.$id
+                        userid: userData.$id,
+                        status: data.status || "active" // Ensure status always has a value
                     };
-                    
-                    // Only add status if it's not empty
-                    if (data.status) {
-                        updateData.status = data.status;
-                    }
                     
                     const dbPost = await appwriteService.updatePost(post.$id, updateData);
                     
@@ -174,20 +170,16 @@ export default function PostForm({ post }) {
                             title: data.title,
                             content: data.content,
                             featuredimage: file.$id,
-                            userid: userData.$id
+                            userid: userData.$id,
+                            status: data.status || "active" // Ensure status always has a value
                         };
-                        
-                        // Only add status if it's not empty 
-                        if (data.status) {
-                            postData.status = data.status;
-                        }
                         
                         console.log("Preparing to create post with data:", {
                             title: postData.title.substring(0, 30) + "...",
                             contentLength: postData.content.length,
                             featuredimage: postData.featuredimage,
                             userid: postData.userid,
-                            status: postData.status || "N/A"
+                            status: postData.status
                         });
                         
                         try {
