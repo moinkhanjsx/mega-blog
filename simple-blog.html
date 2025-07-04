@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogWave - Your Blogging Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles */
+        :root {
+            --color-indigo-400: #818cf8;
+            --color-pink-400: #f472b6;
+            --color-purple-400: #c084fc;
+            --color-indigo-700: #4338ca;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-700: #374151;
+        }
+
+        body {
+            background-color: #030712;
+            color: var(--color-gray-300);
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--color-gray-200);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-left: 1.5rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #4f46e5, #7e22ce);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        nav {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            align-items: center;
+            padding-right: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            nav {
+                gap: 1rem;
+                font-size: 1.125rem;
+                padding-right: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            nav {
+                gap: 1.5rem;
+            }
+        }
+        
+        nav a {
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            color: var(--color-gray-700);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        nav a:hover {
+            background-image: linear-gradient(to right, rgba(224, 231, 255, 0.6), rgba(251, 207, 232, 0.6));
+            color: var(--color-indigo-700);
+        }
+        
+        nav a .hover-effect {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            background-image: linear-gradient(to right, var(--color-indigo-400), var(--color-pink-400), var(--color-purple-400));
+            filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover .hover-effect {
+            opacity: 0.2;
+        }
+        
+        nav a .text {
+            position: relative;
+            z-index: 10;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: bold;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .post-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .post-content {
+            padding: 1.5rem;
+        }
+        
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-excerpt {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #4f46e5, #7e22ce);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">BlogWave</div>
+        </div>
+        <nav>
+            <a href="#">
+                <span class="hover-effect"></span>
+                <span class="text">Home</span>
+            </a>
+            <a href="#">
+                <span class="hover-effect"></span>
+                <span class="text">Add Post</span>
+            </a>
+            <a href="#">
+                <span class="hover-effect"></span>
+                <span class="text">All Posts</span>
+            </a>
+            <a href="#">
+                <span class="hover-effect"></span>
+                <span class="text">Login</span>
+            </a>
+            <a href="#">
+                <span class="hover-effect"></span>
+                <span class="text">Signup</span>
+            </a>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1>Welcome to BlogWave</h1>
+            <p>Share your thoughts, ideas, and stories with the world.</p>
+            <a href="#" class="btn">Create your first post</a>
+            <div class="auth-buttons">
+                <a href="#" class="btn-outline">Login</a>
+                <a href="#" class="btn-outline">Sign Up</a>
+            </div>
+        </section>
+        
+        <section class="posts">
+            <article class="post-card">
+                <img src="https://source.unsplash.com/random/600x400/?technology" alt="Post Image" class="post-image">
+                <div class="post-content">
+                    <h2 class="post-title">Getting Started with React</h2>
+                    <p class="post-excerpt">Learn the basics of React and start building your first component-based application.</p>
+                    <div class="post-meta">
+                        <span>July 1, 2025</span>
+                        <span>5 min read</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card">
+                <img src="https://source.unsplash.com/random/600x400/?code" alt="Post Image" class="post-image">
+                <div class="post-content">
+                    <h2 class="post-title">Modern CSS Techniques</h2>
+                    <p class="post-excerpt">Explore the latest CSS features and how they can improve your web development workflow.</p>
+                    <div class="post-meta">
+                        <span>June 28, 2025</span>
+                        <span>7 min read</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card">
+                <img src="https://source.unsplash.com/random/600x400/?design" alt="Post Image" class="post-image">
+                <div class="post-content">
+                    <h2 class="post-title">UI/UX Design Principles</h2>
+                    <p class="post-excerpt">Understanding the fundamentals of good design and how to apply them to your projects.</p>
+                    <div class="post-meta">
+                        <span>June 25, 2025</span>
+                        <span>6 min read</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        // Simple script to simulate auth state
+        document.addEventListener('DOMContentLoaded', function() {
+            const simulateAuth = localStorage.getItem('simulated-auth');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            if (simulateAuth === 'true') {
+                // Show authenticated nav items
+                navLinks[0].style.display = 'block'; // Home
+                navLinks[1].style.display = 'block'; // Add Post
+                navLinks[2].style.display = 'block'; // All Posts
+                navLinks[3].style.display = 'none';  // Login
+                navLinks[4].style.display = 'none';  // Signup
+                
+                // Add logout button
+                const logoutBtn = document.createElement('a');
+                logoutBtn.innerHTML = '<span class="hover-effect"></span><span class="text">Logout</span>';
+                logoutBtn.href = '#';
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.setItem('simulated-auth', 'false');
+                    window.location.reload();
+                });
+                document.querySelector('nav').appendChild(logoutBtn);
+                
+                // Update hero section
+                document.querySelector('.hero h1').textContent = 'Welcome back!';
+                document.querySelector('.hero p').textContent = 'Continue writing and sharing your amazing content.';
+                document.querySelector('.hero .btn').textContent = 'Create new post';
+                document.querySelector('.auth-buttons').style.display = 'none';
+            } else {
+                // Show non-authenticated nav items
+                navLinks[0].style.display = 'block'; // Home
+                navLinks[1].style.display = 'none';  // Add Post
+                navLinks[2].style.display = 'none';  // All Posts
+                navLinks[3].style.display = 'block'; // Login
+                navLinks[4].style.display = 'block'; // Signup
+                
+                // Add login button functionality
+                navLinks[3].addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.setItem('simulated-auth', 'true');
+                    window.location.reload();
+                });
+                
+                document.querySelectorAll('.auth-buttons a')[0].addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.setItem('simulated-auth', 'true');
+                    window.location.reload();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
