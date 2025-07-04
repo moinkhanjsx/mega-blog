@@ -12,6 +12,9 @@ import PostForm from "./post-form/PostForm";
 import PostCard from "./PostCard";
 import AuthLayout from "./AuthLayout";
 import Input from "./Input";
+import ThemeToggle from "./ThemeToggle";
+import LoadingSpinner from "./LoadingSpinner";
+
 export {
     Header,
     Footer,
@@ -27,4 +30,6 @@ export {
     AuthLayout, 
     Input,
     Select,
+    ThemeToggle,
+    LoadingSpinner,
 }

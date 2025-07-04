@@ -16,6 +16,20 @@
   --gray-950: #030712;
 }
 
+.dark {
+  --gray-50: #030712;
+  --gray-100: #111827;
+  --gray-200: #1f2937;
+  --gray-300: #374151;
+  --gray-400: #4b5563;
+  --gray-500: #6b7280;
+  --gray-600: #9ca3af;
+  --gray-700: #d1d5db;
+  --gray-800: #e5e7eb;
+  --gray-900: #f3f4f6;
+  --gray-950: #f9fafb;
+}
+
 /* Tailwind directives */
 @tailwind base;
 @tailwind components;
@@ -41,14 +55,15 @@ html {
 }
 
 body {
-  background-color: var(--gray-950);
-  color: var(--gray-300);
-  min-height: 100vh;
   font-family: 'DM Sans', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: var(--gray-900);
+  color: var(--gray-300);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
-  color: white;
   font-family: 'Clash Display', sans-serif;
 }

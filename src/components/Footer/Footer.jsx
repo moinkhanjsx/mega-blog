@@ -4,7 +4,7 @@ import Logo from '../Logo'
 
 function Footer() {
   return (
-    <footer className="w-full py-6 text-center text-gray-500 bg-gray-50 border-t mt-10 flex flex-col items-center gap-2">
+    <footer className="w-full py-6 text-center text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-t dark:border-gray-700 mt-10 flex flex-col items-center gap-2 transition-colors duration-300">
       <div className="flex gap-4 mb-2">
         <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-500 transition">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

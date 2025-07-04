@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import appwriteService from "../appwrite/config";
-import { PostCard } from "../components";
+import { PostCard, LoadingSpinner } from "../components";
 import { useLocation } from "react-router-dom";
 
 function AllPosts() {
@@ -21,7 +21,11 @@ function AllPosts() {
         appwriteService.getPosts([]).then((posts) => {
             if (posts) {
                 setPosts(posts.documents)
+                console.log("All posts loaded:", posts.documents.length)
             }
+            setLoading(false);
+        }).catch(error => {
+            console.error("Error loading all posts:", error);
             setLoading(false);
         })
     }, [])
@@ -31,11 +35,11 @@ function AllPosts() {
         <h1 className="text-4xl font-extrabold text-center mb-10 bg-gradient-to-r from-indigo-500 via-pink-500 to-purple-500 text-transparent bg-clip-text drop-shadow-lg animate-gradient-x">All Blog Posts</h1>
         {loading ? (
             <div className="flex justify-center items-center min-h-[40vh]">
-                <span className="text-xl text-gray-500 animate-pulse">Loading all posts...</span>
+                <LoadingSpinner text="Loading all posts..." />
             </div>
         ) : posts.length === 0 ? (
             <div className="flex flex-col items-center justify-center min-h-[40vh]">
-                <p className="text-lg text-gray-500">No posts found.</p>
+                <p className="text-lg text-gray-500 dark:text-gray-400">No posts found.</p>
             </div>
         ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

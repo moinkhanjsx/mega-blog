@@ -51,7 +51,16 @@ export class AuthService {
                 code: error.code,
                 type: error.type
             });
-            throw error;
+            
+            // Transform error to provide more user-friendly messages
+            const userFriendlyError = new Error(
+                error.code === 401 ? "Invalid email or password. Please try again." :
+                error.code === 429 ? "Too many attempts. Please try again later." :
+                error.code === 404 ? "Account not found. Please register first." :
+                "An unexpected error occurred. Please try again."
+            );
+            userFriendlyError.originalError = error;
+            throw userFriendlyError;
         }
     }
 
