@@ -67,28 +67,25 @@ function PostCard({$id, title, featuredImage, featuredimage, ...restProps}) {
     return (
         <div 
             onClick={handlePostClick} 
-            className="w-full h-full group relative flex flex-col transition-all duration-500 cursor-pointer rounded-3xl overflow-hidden transform hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(125,125,255,0.25)] dark:hover:shadow-[0_10px_40px_rgba(80,80,200,0.3)]"
+            className="h-full w-full group relative flex flex-col transition-all duration-500 cursor-pointer rounded-3xl overflow-hidden transform hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(125,125,255,0.25)] dark:hover:shadow-[0_10px_40px_rgba(80,80,200,0.3)] min-w-0 max-w-full sm:min-w-[220px] md:min-w-[260px] lg:min-w-[280px] xl:min-w-[320px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl"
+            style={{ touchAction: 'manipulation' }}
             data-post-id={$id}
         >
             {/* ...existing code... */}
-            {/* Card Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-gray-50/80 to-indigo-50/90 dark:from-gray-800/90 dark:via-gray-900/80 dark:to-indigo-950/90 rounded-3xl transition-colors duration-300"></div>
-            
+            {/* Card Background Solid */}
+            <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-3xl transition-colors duration-300"></div>
             {/* Glass effect border */}
             <div className="absolute inset-0 rounded-3xl border border-white/30 dark:border-white/5 backdrop-blur-sm"></div>
-            
-            {/* Hover Effect Gradient - Multi-layered for depth */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-indigo-100/40 via-purple-50/30 to-pink-100/40 dark:from-indigo-900/40 dark:via-purple-900/30 dark:to-pink-900/40 rounded-3xl transition-opacity duration-500"></div>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-tr from-blue-100 via-transparent to-transparent dark:from-blue-800 dark:via-transparent dark:to-transparent rounded-3xl transition-opacity duration-500 delay-75"></div>
+            {/* Removed Hover Effect Gradient */}
             
             {/* Card Content - Above the background gradients */}
-            <div className="relative z-10 flex flex-col h-full">
+            <div className="relative z-10 flex flex-col h-full min-h-0">
                 {/* Image Container */}
-                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-3xl">
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-3xl min-h-[120px] xs:min-h-[140px] sm:min-h-[160px] md:min-h-[180px] lg:min-h-[200px]">
                     {loading ? (
                         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
                             <div className="animate-pulse flex items-center justify-center w-full h-full">
-                                <div className="w-16 h-16 bg-gray-200/50 dark:bg-gray-700/50 rounded-full"></div>
+                                <div className="w-10 h-10 sm:w-16 sm:h-16 bg-gray-200/50 dark:bg-gray-700/50 rounded-full"></div>
                             </div>
                         </div>
                     ) : imageUrl && !imageError ? (
@@ -96,30 +93,31 @@ function PostCard({$id, title, featuredImage, featuredimage, ...restProps}) {
                             <img 
                                 src={imageUrl} 
                                 alt={title} 
-                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                                className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-in-out select-none pointer-events-none"
                                 onError={handleImageError}
+                                draggable={false}
+                                loading="lazy"
                             />
-                            {/* Image Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            {/* Image Overlay Solid (removed gradient) */}
+                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             
                             {/* Read more badge that appears on hover */}
-                            <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:translate-y-0 translate-y-4">
-                                <span className="px-4 py-2 text-sm font-semibold text-white bg-indigo-600/90 backdrop-blur-md rounded-full shadow-lg">Read more</span>
+                            <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:translate-y-0 translate-y-2 sm:group-hover:translate-y-0 sm:translate-y-4">
+                                <span className="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white bg-indigo-600/90 backdrop-blur-md rounded-full shadow-lg">Read more</span>
                             </div>
                         </>
                     ) : (
-                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
-                            <img src="/placeholder.svg" alt="No image available" className="w-1/2 h-1/2 object-contain opacity-50" />
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+                            <img src="/placeholder.svg" alt="No image available" className="w-1/3 h-1/3 sm:w-1/2 sm:h-1/2 object-contain opacity-50" draggable={false} />
                         </div>
                     )}
                 </div>
                 
                 {/* Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between relative z-10">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 text-transparent bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-600 group-hover:via-purple-600 group-hover:to-indigo-600 dark:group-hover:from-pink-400 dark:group-hover:via-purple-400 dark:group-hover:to-indigo-400 transition-all duration-500">{title}</h3>
-                    
+                <div className="p-3 sm:p-4 md:p-6 flex-1 flex flex-col justify-between relative z-10 min-h-0">
+                    <h3 className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 text-gray-900 dark:text-gray-100 transition-all duration-500 line-clamp-2">{title}</h3>
                     <div className="mt-auto">
-                        <span className="inline-block px-4 py-1.5 text-sm font-semibold text-indigo-600 dark:text-indigo-300 bg-indigo-100/80 dark:bg-indigo-900/40 rounded-full transition-colors duration-300 group-hover:bg-indigo-200 dark:group-hover:bg-indigo-800/50 backdrop-blur-sm">Explore article</span>
+                        <span className="inline-block px-2 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-300 bg-indigo-100/80 dark:bg-indigo-900/40 rounded-full transition-colors duration-300 backdrop-blur-sm">Explore article</span>
                     </div>
                 </div>
             </div>

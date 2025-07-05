@@ -220,7 +220,7 @@ export default function PostForm({ post }) {
     };
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="max-w-2xl mx-auto bg-gradient-to-br from-white via-gray-50 to-indigo-50 dark:from-gray-900 dark:via-indigo-950 dark:to-purple-950 p-10 rounded-3xl shadow-2xl mt-14 space-y-10 border border-gray-200 dark:border-gray-800 animate-fade-in">
+        <form onSubmit={handleSubmit(submit)} className="max-w-2xl mx-auto bg-white dark:bg-gray-900 p-10 rounded-3xl shadow-2xl mt-14 space-y-10 border border-gray-200 dark:border-gray-800 animate-fade-in">
             {/* fallback UI for debugging */}
             {!userData && <div className="text-red-600 font-semibold text-center">User not logged in or userData missing</div>}
             {error && (
@@ -234,7 +234,7 @@ export default function PostForm({ post }) {
                 </div>
             )}
             <div className="space-y-8">
-                <h2 className="text-4xl font-black text-center mb-8 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text drop-shadow animate-gradient-x tracking-tight">
+                <h2 className="text-4xl font-black text-center mb-8 text-gray-900 dark:text-gray-100 tracking-tight">
                     {post ? 'Edit Post' : 'Create New Post'}
                 </h2>
                 <div className="space-y-2">
@@ -297,7 +297,7 @@ export default function PostForm({ post }) {
                 <Button 
                     type="submit" 
                     disabled={loading}
-                    className="w-full py-3 text-lg rounded-xl bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 text-white font-bold shadow-xl hover:scale-[1.03] hover:shadow-2xl focus:ring-2 focus:ring-indigo-400 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-4 animate-gradient-x tracking-wide"
+                    className="w-full py-3 text-lg rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-xl hover:scale-[1.03] hover:shadow-2xl focus:ring-2 focus:ring-indigo-400 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-4 tracking-wide"
                 > 
                     {loading ? "Processing..." : (post ? "Update Post" : "Publish Post")} 
                 </Button>

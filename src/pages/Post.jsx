@@ -161,23 +161,23 @@ export default function Post() {
                 <div className="mb-4">
                     <Button 
                         onClick={handleGoBack}
-                        className="px-4 py-2 rounded flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors"
+                        className="px-3 py-1.5 sm:px-4 sm:py-2 rounded text-sm sm:text-base flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors min-h-0 min-w-0"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
                         </svg>
                         Back
                     </Button>
                 </div>
-                <div className="w-full flex justify-center mb-6 relative">
-                    <div className="w-full max-w-4xl overflow-visible rounded-3xl shadow-2xl bg-gradient-to-br from-white/90 via-gray-50/80 to-indigo-50/90 dark:from-gray-900/90 dark:via-gray-950/80 dark:to-indigo-950/90 border border-white/30 dark:border-white/10 backdrop-blur-md p-6 md:p-10 flex flex-col items-center relative">
+                <div className="w-full flex justify-center mb-6 relative px-2 sm:px-0">
+                    <div className="w-full max-w-4xl overflow-visible rounded-3xl shadow-2xl bg-gradient-to-br from-white/90 via-gray-50/80 to-indigo-50/90 dark:from-gray-900/90 dark:via-gray-950/80 dark:to-indigo-950/90 border border-white/30 dark:border-white/10 backdrop-blur-md p-3 sm:p-6 md:p-10 flex flex-col items-center relative">
                         <div className="absolute inset-0 rounded-3xl border border-white/30 dark:border-white/5 pointer-events-none"></div>
                         {(post.featuredImage || post.featuredimage) ? (
                             <div className="relative z-10 flex justify-center w-full">
                                 <img
                                     src={appwriteService.getFilePreview(post.featuredImage || post.featuredimage, 1200)}
                                     alt={post.title}
-                                    className="w-full max-w-xl h-[220px] md:h-[260px] object-cover rounded-2xl shadow-lg border border-white/40 dark:border-white/10 bg-white/60 dark:bg-gray-900/60 backdrop-blur-md"
+                                    className="w-full max-w-xl h-[160px] sm:h-[220px] md:h-[260px] object-cover rounded-2xl shadow-lg border border-white/40 dark:border-white/10 bg-white/60 dark:bg-gray-900/60 backdrop-blur-md"
                                     onLoad={() => console.log('Image loaded successfully')}
                                     onError={(e) => {
                                         console.error('Image failed to load - trying download URL');
@@ -196,22 +196,62 @@ export default function Post() {
                         )}
 
                         {isAuthor && (
-                            <div className="absolute right-6 top-6 z-20 flex flex-col gap-3 items-end">
-                                <Link to={`/edit-post/${post.$id}`} className="w-full">
-                                    <Button bgColor="bg-green-500" className="w-full">
-                                        Edit
-                                    </Button>
-                                </Link>
-                                <Button bgColor="bg-red-500" onClick={() => setShowConfirm(true)} disabled={deleting} className="w-full">
-                                    {deleting ? "Deleting..." : "Delete"}
-                                </Button>
-                                <ConfirmDialog
-                                    open={showConfirm}
-                                    title="Delete Post?"
-                                    message="Are you sure you want to delete this post? This action cannot be undone."
-                                    onConfirm={deletePost}
-                                    onCancel={() => setShowConfirm(false)}
-                                />
+                            <div className="absolute right-6 top-6 z-20">
+                              <span
+                                className="inline-flex divide-x divide-gray-300 overflow-hidden rounded border border-gray-300 bg-white shadow-sm dark:divide-gray-600 dark:border-gray-600 dark:bg-gray-800"
+                              >
+                                <button
+                                  type="button"
+                                  className="px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
+                                  aria-label="Edit"
+                                  onClick={() => window.location.href = `/edit-post/${post.$id}`}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="size-4"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+                                    />
+                                  </svg>
+                                </button>
+
+                                <button
+                                  type="button"
+                                  className="px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
+                                  aria-label="Delete"
+                                  onClick={() => setShowConfirm(true)}
+                                  disabled={deleting}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="size-4"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                                    />
+                                  </svg>
+                                </button>
+                              </span>
+                              <ConfirmDialog
+                                open={showConfirm}
+                                title="Delete Post?"
+                                message="Are you sure you want to delete this post? This action cannot be undone."
+                                onConfirm={deletePost}
+                                onCancel={() => setShowConfirm(false)}
+                              />
                             </div>
                         )}
                     </div>
