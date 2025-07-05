@@ -8,4 +8,7 @@ export default defineConfig({
     host: true, // Listen on all addresses for Render compatibility
     port: 5173, // Optional: Render sets $PORT, but this is a safe default
   },
+  preview: {
+    allowedHosts: ["mega-blog-3ffs.onrender.com"],
+  },
 })
