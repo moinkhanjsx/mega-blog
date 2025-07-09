@@ -35,21 +35,10 @@ function AllPosts() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-gradient-to-br from-indigo-200/30 to-purple-200/30 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-full filter blur-3xl opacity-50 animate-float"></div>
-        <div
-          className="absolute bottom-20 right-1/4 w-80 h-80 bg-gradient-to-tl from-pink-200/30 to-indigo-200/30 dark:from-pink-900/10 dark:to-indigo-900/10 rounded-full filter blur-3xl opacity-50 animate-float"
-          style={{ animationDelay: "1.2s" }}
-        ></div>
-      </div>
-
-      {/* Header section with glass effect */}
-      <div className="relative mb-10 sm:mb-16 text-center w-full">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-32 bg-gradient-to-r from-indigo-100/30 via-purple-100/30 to-pink-100/30 dark:from-indigo-900/10 dark:via-purple-900/10 dark:to-pink-900/10 blur-3xl opacity-70 animate-gradient-x"></div>
-
-        <div className="relative z-10 py-8 px-6 rounded-3xl glass-effect inline-block mx-auto">
-          <h1 className="text-5xl font-extrabold py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-300 dark:via-purple-300 dark:to-pink-300 text-transparent bg-clip-text drop-shadow-lg animate-gradient-x">
+      {/* Header section */}
+      <div className="mb-10 sm:mb-16 text-center w-full">
+        <div className="py-8 px-6 rounded-3xl bg-white dark:bg-gray-900 shadow-md inline-block mx-auto">
+          <h1 className="text-5xl font-extrabold py-4 text-gray-900 dark:text-gray-100">
             All Blog Posts
           </h1>
           <p className="mt-2 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -63,8 +52,8 @@ function AllPosts() {
           <LoadingSpinner text="Loading all posts..." />
         </div>
       ) : posts.length === 0 ? (
-        <div className="flex flex-col items-center justify-center min-h-[40vh] p-8 rounded-3xl glass-effect border border-white/10 dark:border-white/5">
-          <div className="w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center shadow-inner">
+        <div className="flex flex-col items-center justify-center min-h-[40vh] p-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+          <div className="w-24 h-24 mb-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center shadow-inner">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 text-gray-400 dark:text-gray-500"
@@ -93,8 +82,7 @@ function AllPosts() {
           {posts.map((post, index) => (
             <div
               key={post.$id}
-              className="animate-fade-in-up h-full min-w-0"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="h-full min-w-0"
             >
               <PostCard {...post} />
             </div>

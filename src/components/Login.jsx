@@ -22,7 +22,12 @@ function Login() {
                 const userData = await authService.getCurrentUser();
                 if(userData) {
                     dispatch(authLogin(userData));
-                    navigate("/");
+                    // Check for admin label (Appwrite stores labels as an array)
+                    if (userData.labels && userData.labels.includes("admin")) {
+                        navigate("/admin");
+                    } else {
+                        navigate("/");
+                    }
                 } else {
                     throw new Error("Failed to get user data");
                 }
