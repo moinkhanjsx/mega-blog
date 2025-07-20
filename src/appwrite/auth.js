@@ -4,24 +4,43 @@ import { Client, Account, ID } from "appwrite";
 export class AuthService {
     client = new Client();
     account;
+    initialized = false;
 
     constructor() {
-        this.client
-            .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProjectId)
-            ; // Add API key
-        
-        this.account = new Account(this.client);
-        
-        // Debugging
-        console.log("Appwrite Client Initialized", {
-            endpoint: conf.appwriteUrl,
-            project: conf.appwriteProjectId,
+        try {
+            // Validate required configuration
+            if (!conf.appwriteUrl || conf.appwriteUrl === 'undefined') {
+                console.error("Appwrite URL is not configured");
+                return;
+            }
             
-        });
+            if (!conf.appwriteProjectId || conf.appwriteProjectId === 'undefined') {
+                console.error("Appwrite Project ID is not configured");
+                return;
+            }
+            
+            this.client
+                .setEndpoint(conf.appwriteUrl)
+                .setProject(conf.appwriteProjectId);
+            
+            this.account = new Account(this.client);
+            this.initialized = true;
+            
+            // Debugging
+            console.log("Appwrite Client Initialized", {
+                endpoint: conf.appwriteUrl,
+                project: conf.appwriteProjectId
+            });
+        } catch (error) {
+            console.error("Failed to initialize Appwrite client:", error);
+        }
     }
 
     async createAccount({email, password, name}) {
+        if (!this.initialized) {
+            throw new Error("Appwrite client not properly initialized. Check your configuration.");
+        }
+        
         try {
             const userAccount = await this.account.create(
                 ID.unique(),
@@ -42,6 +61,10 @@ export class AuthService {
     }
 
     async createEmailPasswordSession(email, password) {
+        if (!this.initialized) {
+            throw new Error("Appwrite client not properly initialized. Check your configuration.");
+        }
+        
         try {
             // In Appwrite v13, the method is createEmailSession
             return await this.account.createEmailSession(email, password);
@@ -65,6 +88,11 @@ export class AuthService {
     }
 
     async getCurrentUser() {
+        if (!this.initialized) {
+            console.error("Appwrite client not properly initialized. Check your configuration.");
+            return null;
+        }
+        
         try {
             return await this.account.get();
         } catch (error) {
@@ -74,6 +102,13 @@ export class AuthService {
     }
 
     async logout() {
+        if (!this.initialized) {
+            console.error("Appwrite client not properly initialized. Check your configuration.");
+            // Fallback: Clear local storage
+            localStorage.clear();
+            return true;
+        }
+        
         try {
             await this.account.deleteSessions();
             return true;

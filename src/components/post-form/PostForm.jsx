@@ -220,21 +220,21 @@ export default function PostForm({ post }) {
     };
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="max-w-2xl mx-auto bg-white dark:bg-gray-900 p-10 rounded-3xl shadow-2xl mt-14 space-y-10 border border-gray-200 dark:border-gray-800 animate-fade-in">
+        <form onSubmit={handleSubmit(submit)} className="max-w-2xl mx-auto bg-white dark:bg-gray-900 p-4 sm:p-6 md:p-10 rounded-3xl shadow-2xl mt-8 sm:mt-14 space-y-6 sm:space-y-10 border border-gray-200 dark:border-gray-800 animate-fade-in overflow-x-hidden w-full" style={{ width: '100%', maxWidth: '100%' }}>
             {/* fallback UI for debugging */}
-            {!userData && <div className="text-red-600 font-semibold text-center">User not logged in or userData missing</div>}
+            {!userData && <div className="text-red-600 font-semibold text-center text-sm sm:text-base">User not logged in or userData missing</div>}
             {error && (
-                <div className="bg-red-50 text-red-700 p-4 rounded-lg mb-6 text-center font-semibold border border-red-200 animate-pulse shadow">
+                <div className="bg-red-50 text-red-700 p-3 sm:p-4 rounded-lg mb-4 sm:mb-6 text-center font-semibold border border-red-200 animate-pulse shadow text-sm sm:text-base">
                     <p>{error}</p>
                 </div>
             )}
             {successMessage && (
-                <div className="bg-green-50 text-green-700 p-4 rounded-lg mb-6 text-center font-semibold border border-green-200 animate-pulse shadow">
+                <div className="bg-green-50 text-green-700 p-3 sm:p-4 rounded-lg mb-4 sm:mb-6 text-center font-semibold border border-green-200 animate-pulse shadow text-sm sm:text-base">
                     <p>{successMessage}</p>
                 </div>
             )}
-            <div className="space-y-8">
-                <h2 className="text-4xl font-black text-center mb-8 text-gray-900 dark:text-gray-100 tracking-tight">
+            <div className="space-y-6 sm:space-y-8">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center mb-6 sm:mb-8 text-gray-900 dark:text-gray-100 tracking-tight">
                     {post ? 'Edit Post' : 'Create New Post'}
                 </h2>
                 <div className="space-y-2">
@@ -263,7 +263,7 @@ export default function PostForm({ post }) {
                     )}
                 </div>
             </div>
-            <div className="space-y-8 border-t border-gray-100 pt-8">
+            <div className="space-y-6 sm:space-y-8 border-t border-gray-100 pt-6 sm:pt-8">
                 <div className="space-y-2">
                     <Input
                         label="Featured Image :"
@@ -279,7 +279,7 @@ export default function PostForm({ post }) {
                             <img
                                 src={appwriteService.getFilePreview(post.featuredImage || post.featuredimage)}
                                 alt={post.title}
-                                className="rounded-xl shadow-lg w-56 h-36 object-cover border-2 border-indigo-200 bg-gray-50"
+                                className="rounded-xl shadow-lg w-40 sm:w-56 h-28 sm:h-36 object-cover border-2 border-indigo-200 bg-gray-50"
                             />
                         </div>
                     )}
@@ -297,7 +297,7 @@ export default function PostForm({ post }) {
                 <Button 
                     type="submit" 
                     disabled={loading}
-                    className="w-full py-3 text-lg rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-xl hover:scale-[1.03] hover:shadow-2xl focus:ring-2 focus:ring-indigo-400 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-4 tracking-wide"
+                    className="w-full py-2 sm:py-3 text-base sm:text-lg rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-xl hover:scale-[1.03] hover:shadow-2xl focus:ring-2 focus:ring-indigo-400 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-4 tracking-wide"
                 > 
                     {loading ? "Processing..." : (post ? "Update Post" : "Publish Post")} 
                 </Button>

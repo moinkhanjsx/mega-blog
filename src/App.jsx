@@ -22,19 +22,19 @@ function App() {
       }
     })
     .catch((err) => {
-      console.error('getCurrentUser error:', err)
+      console.log('getCurrentUser error:', err)
+      dispatch(logout())
     })
     .finally(() => {
       setLoading(false)
-      console.log('Loading set to false')
     })
-  }, [])
-  
+  }, [dispatch])
+
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-100 dark:bg-gray-900 transition-colors duration-300'>
+    <div className='min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 transition-colors duration-300 w-full max-w-full'>
       <div className='w-full block'>
         <Header />
-        <main className='dark:text-gray-100'>
+        <main className='pt-16 md:pt-0'>
           <Outlet />
         </main>
         <Footer />

@@ -70,19 +70,19 @@ function Home() {
         )
     }
     return (
-        <section className="max-w-7xl mx-auto mt-10 px-4 py-8">
-            <div className="relative mb-16 w-full">
+        <section className="max-w-7xl mx-auto mt-6 sm:mt-10 px-2 sm:px-4 py-4 sm:py-8">
+            <div className="relative mb-12 sm:mb-16 w-full">
                 <div className="relative z-10 flex flex-col items-center">
                     <div className="mb-4 w-full flex justify-center">
                         <Logo />
                     </div>
-                    <h1 className="text-5xl font-extrabold text-center mb-4 text-gray-900 dark:text-gray-100">Latest Posts</h1>
-                    <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 text-center max-w-xs sm:max-w-xl">Discover the latest from our community</p>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-4 text-gray-900 dark:text-gray-100">Latest Posts</h1>
+                    <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 text-center max-w-xs sm:max-w-xl px-2">Discover the latest from our community</p>
                 </div>
             </div>
             
             {/* Card grid with staggered animation */}
-            <div className="grid gap-6 sm:gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 md:gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3">
                 {posts.slice(0, 6).map((post, index) => (
                     <div 
                         key={post.$id} 

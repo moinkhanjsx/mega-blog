@@ -155,10 +155,10 @@ export default function Post() {
     }
 
     return (
-        <div>
+        <div className="overflow-x-hidden w-full max-w-full" style={{ width: '100%', maxWidth: '100%' }}>
             {/* ...existing code... */}
             <Containers>
-                <div className="mb-4">
+                <div className="mb-4 overflow-x-hidden" style={{ width: '100%', maxWidth: '100%' }}>
                     <Button 
                         onClick={handleGoBack}
                         className="px-3 py-1.5 sm:px-4 sm:py-2 rounded text-sm sm:text-base flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors min-h-0 min-w-0"
@@ -169,15 +169,16 @@ export default function Post() {
                         Back
                     </Button>
                 </div>
-                <div className="w-full flex justify-center mb-6 relative px-2 sm:px-0">
-                    <div className="w-full max-w-4xl overflow-visible rounded-3xl shadow-2xl bg-gradient-to-br from-white/90 via-gray-50/80 to-indigo-50/90 dark:from-gray-900/90 dark:via-gray-950/80 dark:to-indigo-950/90 border border-white/30 dark:border-white/10 backdrop-blur-md p-3 sm:p-6 md:p-10 flex flex-col items-center relative">
+                <div className="w-full flex justify-center mb-4 sm:mb-6 relative px-2 sm:px-0 overflow-x-hidden" style={{ width: '100%', maxWidth: '100%' }}>
+                    <div className="w-full max-w-4xl overflow-visible rounded-3xl shadow-2xl bg-gradient-to-br from-white/90 via-gray-50/80 to-indigo-50/90 dark:from-gray-900/90 dark:via-gray-950/80 dark:to-indigo-950/90 border border-white/30 dark:border-white/10 backdrop-blur-md p-3 sm:p-6 md:p-10 flex flex-col items-center relative overflow-x-hidden" style={{ width: '100%', maxWidth: '100%' }}>
                         <div className="absolute inset-0 rounded-3xl border border-white/30 dark:border-white/5 pointer-events-none"></div>
                         {(post.featuredImage || post.featuredimage) ? (
-                            <div className="relative z-10 flex justify-center w-full">
+                            <div className="relative z-10 flex justify-center w-full overflow-x-hidden" style={{ width: '100%', maxWidth: '100%' }}>
                                 <img
                                     src={appwriteService.getFilePreview(post.featuredImage || post.featuredimage, 1200)}
                                     alt={post.title}
-                                    className="w-full max-w-xl h-[160px] sm:h-[220px] md:h-[260px] object-cover rounded-2xl shadow-lg border border-white/40 dark:border-white/10 bg-white/60 dark:bg-gray-900/60 backdrop-blur-md"
+                                    className="w-full max-w-xl h-[140px] sm:h-[180px] md:h-[220px] lg:h-[260px] object-cover rounded-2xl shadow-lg border border-white/40 dark:border-white/10 bg-white/60 dark:bg-gray-900/60 backdrop-blur-md"
+                                    style={{ width: '100%', maxWidth: '100%' }}
                                     onLoad={() => console.log('Image loaded successfully')}
                                     onError={(e) => {
                                         console.error('Image failed to load - trying download URL');
@@ -190,19 +191,19 @@ export default function Post() {
                                 />
                             </div>
                         ) : (
-                            <div className="relative z-10 w-full h-[220px] md:h-[260px] flex items-center justify-center bg-gradient-to-br from-gray-100/80 to-indigo-100/60 dark:from-gray-800/80 dark:to-indigo-950/60 rounded-2xl">
-                                <img src="/vite.svg" alt="No image" className="w-20 h-20 opacity-40" />
+                            <div className="relative z-10 w-full h-[180px] sm:h-[220px] md:h-[260px] flex items-center justify-center bg-gradient-to-br from-gray-100/80 to-indigo-100/60 dark:from-gray-800/80 dark:to-indigo-950/60 rounded-2xl overflow-x-hidden" style={{ width: '100%', maxWidth: '100%' }}>
+                                <img src="/vite.svg" alt="No image" className="w-16 h-16 sm:w-20 sm:h-20 opacity-40" style={{ width: '100%', maxWidth: '100%' }} />
                             </div>
                         )}
 
                         {isAuthor && (
-                            <div className="absolute right-6 top-6 z-20">
+                            <div className="absolute right-3 sm:right-6 top-3 sm:top-6 z-20">
                               <span
                                 className="inline-flex divide-x divide-gray-300 overflow-hidden rounded border border-gray-300 bg-white shadow-sm dark:divide-gray-600 dark:border-gray-600 dark:bg-gray-800"
                               >
                                 <button
                                   type="button"
-                                  className="px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
+                                  className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
                                   aria-label="Edit"
                                   onClick={() => window.location.href = `/edit-post/${post.$id}`}
                                 >
@@ -212,7 +213,7 @@ export default function Post() {
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
                                     stroke="currentColor"
-                                    className="size-4"
+                                    className="size-3 sm:size-4"
                                   >
                                     <path
                                       strokeLinecap="round"
@@ -224,7 +225,7 @@ export default function Post() {
 
                                 <button
                                   type="button"
-                                  className="px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
+                                  className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
                                   aria-label="Delete"
                                   onClick={() => setShowConfirm(true)}
                                   disabled={deleting}
@@ -235,7 +236,7 @@ export default function Post() {
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
                                     stroke="currentColor"
-                                    className="size-4"
+                                    className="size-3 sm:size-4"
                                   >
                                     <path
                                       strokeLinecap="round"
@@ -256,13 +257,13 @@ export default function Post() {
                         )}
                     </div>
                 </div>
-                <div className="w-full max-w-4xl mx-auto mb-6 px-4">
-                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{post.title}</h1>
+                <div className="w-full max-w-4xl mx-auto mb-4 sm:mb-6 px-2 sm:px-4 overflow-x-hidden" style={{ width: '100%', maxWidth: '100%' }}>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white break-words" style={{ width: '100%', maxWidth: '100%' }}>{post.title}</h1>
                 </div>
-                <div className="w-full max-w-4xl mx-auto relative rounded-3xl shadow-xl p-6 md:p-10 border border-white/10 bg-gradient-to-br from-indigo-700/90 via-purple-900/80 to-gray-900/90 dark:from-indigo-900/90 dark:via-purple-950/80 dark:to-black/90 backdrop-blur-md transition-colors duration-300">
+                <div className="w-full max-w-4xl mx-auto relative rounded-3xl shadow-xl p-4 sm:p-6 md:p-10 border border-white/10 bg-gradient-to-br from-indigo-700/90 via-purple-900/80 to-gray-900/90 dark:from-indigo-900/90 dark:via-purple-950/80 dark:to-black/90 backdrop-blur-md transition-colors duration-300 overflow-x-hidden" style={{ width: '100%', maxWidth: '100%' }}>
                     {/* Glass effect border */}
                     <div className="absolute inset-0 rounded-3xl border border-white/10"></div>
-                    <div className="relative z-10 prose prose-lg max-w-none text-white leading-relaxed">
+                    <div className="relative z-10 prose prose-sm sm:prose-base md:prose-lg max-w-none text-white leading-relaxed overflow-x-hidden break-words" style={{ width: '100%', maxWidth: '100%' }}>
                         {parse(post.content)}
                     </div>
                 </div>

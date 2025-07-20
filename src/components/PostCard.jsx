@@ -67,8 +67,8 @@ function PostCard({$id, title, featuredImage, featuredimage, ...restProps}) {
     return (
         <div 
             onClick={handlePostClick} 
-            className="h-full w-full group relative flex flex-col transition-all duration-500 cursor-pointer rounded-3xl overflow-hidden transform hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(125,125,255,0.25)] dark:hover:shadow-[0_10px_40px_rgba(80,80,200,0.3)] min-w-0 max-w-full sm:min-w-[220px] md:min-w-[260px] lg:min-w-[280px] xl:min-w-[320px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl"
-            style={{ touchAction: 'manipulation' }}
+            className="h-full w-full group relative flex flex-col transition-all duration-500 cursor-pointer rounded-3xl overflow-hidden transform hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(125,125,255,0.25)] dark:hover:shadow-[0_10px_40px_rgba(80,80,200,0.3)] min-w-0 max-w-full sm:min-w-[220px] md:min-w-[260px] lg:min-w-[280px] xl:min-w-[320px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl overflow-x-hidden"
+            style={{ touchAction: 'manipulation', width: '100%', maxWidth: '100%' }}
             data-post-id={$id}
         >
             {/* ...existing code... */}
@@ -114,8 +114,8 @@ function PostCard({$id, title, featuredImage, featuredimage, ...restProps}) {
                 </div>
                 
                 {/* Content */}
-                <div className="p-3 sm:p-4 md:p-6 flex-1 flex flex-col justify-between relative z-10 min-h-0">
-                    <h3 className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 text-gray-900 dark:text-gray-100 transition-all duration-500 line-clamp-2">{title}</h3>
+                <div className="p-2 sm:p-3 md:p-4 lg:p-6 flex-1 flex flex-col justify-between relative z-10 min-h-0">
+                    <h3 className="text-sm sm:text-base xs:text-lg md:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 text-gray-900 dark:text-gray-100 transition-all duration-500 line-clamp-2">{title}</h3>
                     <div className="mt-auto">
                         <span className="inline-block px-2 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-300 bg-indigo-100/80 dark:bg-indigo-900/40 rounded-full transition-colors duration-300 backdrop-blur-sm">Explore article</span>
                     </div>

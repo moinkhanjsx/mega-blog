@@ -14,6 +14,7 @@ import AuthLayout from "./AuthLayout";
 import Input from "./Input";
 import ThemeToggle from "./ThemeToggle";
 import LoadingSpinner from "./LoadingSpinner";
+import AdminRoute from "./AdminRoute";
 
 export {
     Header,
@@ -32,4 +33,5 @@ export {
     Select,
     ThemeToggle,
     LoadingSpinner,
+    AdminRoute,
 }

@@ -46,36 +46,13 @@ function EditPost() {
     }
   };
 
-  return post ? (
-    <div className="min-h-screen py-10 bg-gradient-to-br from-gray-900 via-indigo-950 to-purple-950 flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="max-w-2xl w-full mx-auto bg-gradient-to-br from-gray-900 via-indigo-950 to-purple-950 p-10 rounded-3xl shadow-2xl border border-gray-800 animate-fade-in">
-        <h2 className="text-4xl font-black text-center mb-8 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text drop-shadow animate-gradient-x tracking-tight">
-          Edit Post
-        </h2>
-        <div className="mb-6">
-          <Input
-            label="Title :"
-            type="text"
-            name="title"
-            value={form.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-6">
-          <Input
-            label="Content :"
-            type="textarea"
-            name="content"
-            value={form.content}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="w-full py-3 text-lg rounded-xl bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 text-white font-bold shadow-xl hover:scale-[1.03] hover:shadow-2xl focus:ring-2 focus:ring-indigo-400 transition-all duration-200 mt-4 animate-gradient-x tracking-wide">
-          Update Post
-        </button>
-      </form>
+  return (
+    <div className="min-h-screen py-4 sm:py-10 bg-white dark:bg-gray-900 flex items-center justify-center px-2 sm:px-4">
+      <div className="w-full max-w-3xl">
+        <PostForm />
+      </div>
     </div>
-  ) : null;
+  )
 }
 
 export default EditPost;

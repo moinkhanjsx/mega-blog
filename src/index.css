@@ -201,12 +201,34 @@
 /* Base styles */
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
   font-family: 'DM Sans', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Ensure header is not affected by overflow hidden */
+header {
+  overflow: visible !important;
+  z-index: 50;
+}
+
+/* Ensure hamburger menu button is always visible */
+header button {
+  overflow: visible !important;
+  z-index: 51;
 }
 
 .dark body {
@@ -216,4 +238,66 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Clash Display', sans-serif;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Handle long words and URLs */
+p, div, span, h1, h2, h3, h4, h5, h6 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Ensure images don't overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Handle code blocks and pre elements */
+pre, code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  html, body, #root {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Ensure header and its elements are always visible */
+  header, header * {
+    overflow: visible !important;
+  }
+  
+  /* Prevent text overflow on mobile */
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+  
+  /* Ensure containers don't overflow */
+  .container, .max-w-5xl, .max-w-7xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-md, .max-w-sm {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* Prevent form elements from overflowing */
+  input, textarea, select, button {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* Ensure flex and grid containers respect width */
+  .flex, .grid, .flex-col, .flex-row {
+    max-width: 100%;
+    width: 100%;
+  }
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
-import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import { AuthLayout, Login } from './components/index.js'
 import { ThemeProvider } from './context/ThemeContext.jsx'
@@ -17,18 +17,9 @@ import DebugPage from "./pages/DebugPage";
 import './index.css';
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import NotAuthorized from './pages/NotAuthorized.jsx'
-import { useSelector } from 'react-redux';
 import AdminEditPost from './pages/AdminEditPost.jsx';
 import AdminCreatePost from './pages/AdminCreatePost.jsx';
-
-function AdminRoute({ children }) {
-  const userData = useSelector((state) => state.auth.userData);
-  const isAdmin = userData && userData.labels && userData.labels.includes('admin');
-  if (!isAdmin) {
-    return <Navigate to="/not-authorized" />;
-  }
-  return children;
-}
+import AdminRoute from './components/AdminRoute.jsx';
 
 const router = createBrowserRouter([
   {
